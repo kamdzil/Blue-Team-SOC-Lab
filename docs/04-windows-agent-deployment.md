@@ -15,7 +15,8 @@ Deploy a Wazuh agent on a Windows machine and connect it to the Wazuh Manager ru
 
 **Screenshot — Windows Agent Configuration**
 
-![Agent Configuration](../screenshots/phase4-agent-configuration-redacted.png)
+<img width="1919" height="915" alt="phase4-agent-configuration-redacted" src="https://github.com/user-attachments/assets/1036ac3c-18d2-4f07-9bab-95a42e3df666" />
+
 
 ## Step 2 — Install the Agent Using PowerShell
 
@@ -41,7 +42,8 @@ Checked again and confirmed that the service status changed to `Running`.
 
 **Screenshot — PowerShell Installation and Service Verification**
 
-![PowerShell Installation](../screenshots/phase4-powershell-redacted.png)
+<img width="1084" height="636" alt="phase4-powershell-redacted" src="https://github.com/user-attachments/assets/6f78e4b3-e46b-473c-9d7b-f47059574b01" />
+
 
 ## Step 3 — Verify Agent Connectivity
 
@@ -56,7 +58,8 @@ Confirmed that the Windows endpoint appeared with the following details:
 
 **Screenshot — Active Windows Agent**
 
-![Active Windows Agent](../screenshots/phase4-agent-active-redacted.png)
+<img width="1919" height="913" alt="phase4-agent-active-redacted" src="https://github.com/user-attachments/assets/12b31994-468f-484f-a813-5b9681ddd3f0" />
+
 
 ## Results
 
