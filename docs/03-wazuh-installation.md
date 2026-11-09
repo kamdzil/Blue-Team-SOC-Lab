@@ -179,14 +179,20 @@ Completed milestones:
 
 ## Screenshots
 
-Screenshots to include where available:
+<img width="1919" height="902" alt="wzh1" src="https://github.com/user-attachments/assets/41ea4aa3-80d2-4fdf-a92a-ad9c4796ecb0" />
 
-- Wazuh installation output
-- Wazuh service status
-- Ubuntu network configuration
-- Successful Windows ping test
-- Wazuh Dashboard login page
-- Wazuh Dashboard after authentication
+Wazuh Manager — Running
+<img width="1095" height="559" alt="wzh mngr" src="https://github.com/user-attachments/assets/08af3950-46dc-4797-9f90-153eb53e3398" />
+
+Wazuh Indexer — Running
+<img width="1292" height="368" alt="wzh indx" src="https://github.com/user-attachments/assets/a7038af9-8c0b-4f68-a35d-9353108f8e4b" />
+
+Wazuh Dashboard — Running
+<img width="1286" height="350" alt="wzh dshbrdf" src="https://github.com/user-attachments/assets/67769fde-b7ae-41e5-9edb-fe2e050ef2c0" />
+
+
+
+
 
 ## Next Phase — Windows Agent Deployment
 
