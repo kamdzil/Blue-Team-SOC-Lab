@@ -97,15 +97,8 @@ Successfully configured an Ubuntu Server virtual machine using VMware Workstatio
 The environment provides the foundation for deploying Wazuh SIEM and building a Blue Team Security Operations Center (SOC) home lab.
 
 ## Screenshots
+<img width="709" height="716" alt="ssssss1" src="https://github.com/user-attachments/assets/6801c049-ae50-4e52-8f4a-917296b18f54" />
 
-The following screenshots will be added to document the setup:
-
-- VMware Workstation Pro installation
-- Virtual machine hardware configuration
-- Virtual disk configuration (50 GB)
-- NAT network configuration
-- Ubuntu Server running inside VMware
-- Successful network connectivity test
 
 ## Next Phase
 
