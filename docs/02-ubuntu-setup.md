@@ -135,13 +135,8 @@ The environment provides:
 
 ## Screenshots
 
-The following screenshots will be added where available:
+<img width="656" height="108" alt="ubuntu-network-redacted" src="https://github.com/user-attachments/assets/40a0851c-c2e5-4f95-9d8d-018c7d8b0020" />
 
-- Ubuntu Server installation
-- Ubuntu terminal after successful login
-- Operating system version
-- Network interface configuration
-- Windows-to-Ubuntu connectivity test
 
 ## Next Phase
 
