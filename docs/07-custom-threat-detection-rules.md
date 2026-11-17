@@ -13,7 +13,7 @@ Using Microsoft Sysmon, Windows PowerShell, and Wazuh, I successfully generated 
 I connected to my Ubuntu Wazuh server through SSH from Windows PowerShell.
 
 ```powershell
-ssh socadmin@192.168.223.128
+ssh socadmin1@[WAZUH_SERVER_IP]
 ```
 
 Before modifying the existing configuration, I created a backup of the Wazuh custom rules file.
