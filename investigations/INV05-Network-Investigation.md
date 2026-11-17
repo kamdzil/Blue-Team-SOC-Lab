@@ -26,7 +26,7 @@ The investigation demonstrates the SOC workflow:
 | Windows Endpoint | 192.168.##.###| Scan target |
 | Wazuh Server | 192.168.####.#### | Security monitoring |
 
-The Kali VM used NAT networking. Consequently, Windows Firewall recorded the incoming traffic as originating from the Mac host's IP address, `192.168.1.28`.
+The Kali VM used NAT networking. Consequently, Windows Firewall recorded the incoming traffic as originating from the Mac host's IP address, `192.###.##.###`.
 
 All scanning was performed against an authorized laboratory endpoint.
 
