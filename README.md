@@ -1,118 +1,186 @@
-# Blue Team SOC Home Lab — Wazuh SIEM
+# Blue Team SOC Lab — Wazuh SIEM & Threat Detection
 
-## Project Overview
+A hands-on cybersecurity home lab focused on Security Operations Center (SOC) monitoring, detection engineering, threat hunting, and incident response using Wazuh SIEM.
 
-This project demonstrates the deployment and configuration of a Security Operations Center (SOC) home lab using Wazuh SIEM, Ubuntu Server, VMware Workstation Pro, and Windows 11.
+This project demonstrates the deployment of a functional security monitoring environment, Windows endpoint telemetry collection, custom detection rules, and five documented security investigations involving simulated threats.
 
-The goal was to build a functional security monitoring environment capable of collecting endpoint logs, identifying suspicious activity, and investigating security events.
+## Project Highlights
 
-I deployed a centralized SIEM server, connected a Windows endpoint, and successfully detected and investigated a simulated failed-login attempt.
-
-## Technologies Used
-
-| Technology | Purpose |
-|---|---|
-| Wazuh SIEM | Security monitoring, log analysis, and threat detection |
-| Ubuntu Server 24.04 LTS | Hosting the Wazuh infrastructure |
-| VMware Workstation Pro | Virtualization and lab environment |
-| Windows 11 Pro | Monitored endpoint |
-| Windows PowerShell | Agent deployment and service management |
-| Linux CLI | Server administration and troubleshooting |
-| VMware NAT | Virtual network connectivity |
+- Deployed Wazuh SIEM on an Ubuntu Server virtual machine using VMware Workstation.
+- Integrated a Windows endpoint with Wazuh Agent and Sysmon.
+- Collected Windows Security Events, Sysmon process activity, File Integrity Monitoring (FIM) events, and Windows Firewall logs.
+- Developed and tested custom detection rules for brute-force authentication attempts and suspicious PowerShell activity.
+- Investigated five controlled security scenarios using real alerts and endpoint telemetry.
+- Analyzed detection evidence and documented analyst findings, MITRE ATT&CK mappings, and recommended incident response actions.
+- Validated configuration restoration and firewall cleanup following simulations.
 
 ## Lab Architecture
 
-The environment consists of two primary components:
+| Component | Technology | Purpose |
+|---|---|---|
+| SIEM Server | Ubuntu Server 24.04 LTS | Hosts Wazuh components |
+| SIEM Platform | Wazuh 4.7.5 | Event monitoring, correlation, alerting |
+| Virtualization | VMware Workstation Pro | Hosts Ubuntu server |
+| Endpoint | Windows 11 | Monitored SOC workstation |
+| Endpoint Monitoring | Wazuh Agent | Log collection and FIM |
+| Process Monitoring | Microsoft Sysmon | Detailed endpoint process telemetry |
+| Attack Simulation | Kali Linux | Authorized network reconnaissance |
+| Network Analysis | Nmap, Windows Firewall Logs | Network traffic and connection analysis |
+| Documentation | GitHub, Markdown | Investigation reporting and evidence |
 
-**1. Wazuh SIEM Server**
+The Wazuh manager, indexer, and dashboard run on Ubuntu Server. The Windows endpoint forwards security telemetry to Wazuh for centralized investigation.
 
-- Ubuntu Server running in VMware Workstation Pro
-- 4 virtual CPU cores
-- 8 GB RAM
-- 50 GB virtual disk
-- Wazuh Manager, Indexer, and Dashboard
+Kali Linux runs separately and was used for controlled reconnaissance against the Windows endpoint.
 
-**2. Monitored Windows Endpoint**
+## Repository Structure
 
-- Windows 11 Pro
-- Wazuh Agent 4.14.10
-- Agent name: `Windows-SOC-Agent`
-- Centralized security event monitoring
+```text
+Blue-Team-SOC-Lab/
+├── README.md
+├── docs/
+│   ├── 01-vmware-setup.md
+│   ├── 02-ubuntu-setup.md
+│   ├── 03-wazuh-installation.md
+│   ├── 04-windows-agent-deployment.md
+│   ├── ...
+│   ├── 08-brute-force-detection.md
+│   └── 09-file-integrity-monitoring.md
+└── investigations/
+    ├── README.md
+    ├── INV01-BruteForce-Investigation.md
+    ├── INV02-PowerShell-Investigation.md
+    ├── INV03-Phishing-Investigation.md
+    ├── INV04-ConfigTampering-Investigation.md
+    ├── INV05-Network-Investigation.md
+    └── Investigation evidence screenshots
+```
 
-The Windows agent communicates with the Wazuh Manager through VMware's virtual network, forwarding security events for analysis and investigation.
+## Lab Implementation
 
-## Project Accomplishments
+The initial build consists of nine documented phases covering installation, configuration, telemetry collection, and security monitoring.
 
-### 1. SIEM Infrastructure Deployment
+**[View Lab Setup & Implementation](docs/)**
 
-- Installed and configured Ubuntu Server inside VMware Workstation Pro.
-- Deployed Wazuh Manager, Indexer, and Dashboard.
-- Verified that all three Wazuh services were running.
-- Configured virtual networking and verified connectivity between the Windows host and Ubuntu server.
+### Key Implementations
 
-### 2. Endpoint Security Monitoring
+**1. SIEM Deployment**
 
-- Installed and configured a Wazuh agent on Windows 11.
-- Registered the endpoint with the Wazuh Manager.
-- Verified that the agent successfully connected with an **Active** status.
-- Confirmed that Windows security events were being collected and displayed in Threat Hunting.
+Installed and configured Wazuh Manager, Indexer, and Dashboard on an Ubuntu Server VM.
 
-### 3. Security Event Detection
+**2. Windows Endpoint Integration**
 
-Performed a controlled failed-login test against the monitored Windows workstation.
+Deployed a Windows Wazuh Agent and verified successful communication with the Wazuh Manager.
 
-Wazuh detected the authentication failure and generated the following alert:
+**3. Windows Security Monitoring**
 
-| Detection Field | Result |
-|---|---|
-| Event | Failed Windows login |
-| Windows Event ID | `4625` |
-| Wazuh Rule ID | `60122` |
-| Severity | Level 5 |
-| Logon Type | `2` — Interactive |
-| Detection Group | `authentication_failed` |
-| Result | Successfully detected and investigated |
+Enabled Windows authentication auditing and verified ingestion of failed login events.
 
-The investigation confirmed that Wazuh was successfully collecting authentication events and providing detailed information for security analysis.
+**4. Sysmon Integration**
 
-## Project Documentation
+Configured Windows Sysmon telemetry collection to monitor process creation and associated command-line activity.
 
-The complete installation, configuration, verification, and investigation procedures are documented below.
+**5. Custom Detection Engineering**
 
-| Phase | Documentation |
-|---|---|
-| 1 | [VMware Workstation Pro Setup](docs/01-vmware-setup.md) |
-| 2 | [Ubuntu Server Setup](docs/02-ubuntu-setup.md) |
-| 3 | [Wazuh SIEM Installation](docs/03-wazuh-installation.md) |
-| 4 | [Windows Agent Deployment](docs/04-windows-agent-deployment.md) |
-| 5 | [Security Monitoring & Threat Detection](docs/05-security-monitoring-threat-detection.md) |
+Created and tested Wazuh rules for suspicious authentication behavior and PowerShell execution patterns.
 
-Each guide includes technical explanations, relevant commands, troubleshooting procedures, and supporting screenshots.
+**6. File Integrity Monitoring**
+
+Configured real-time monitoring of selected directories and detected file creation, modification, and deletion events.
+
+**7. Network Monitoring**
+
+Ingested Windows Firewall logs to identify and correlate repeated rejected network connections.
+
+## SOC Investigations
+
+Five documented investigations demonstrate practical detection, investigation, and response workflows.
+
+| # | Investigation | Key Detection | Result |
+|---|---|---|---|
+| 01 | Brute-Force Login Detection | Custom Rule 100200, Level 12 | Repeated login failures correlated |
+| 02 | Suspicious PowerShell Execution | Custom Rule 100300, Level 10 | Execution-policy bypass detected |
+| 03 | Phishing Email Analysis | FIM Rule 550, Level 7 | Simulated email modification detected |
+| 04 | Security Configuration Tampering | FIM Rules 554 and 550 | Tampering and restoration verified |
+| 05 | Network Reconnaissance | Firewall Rule 4151, Level 10 | Repeated dropped connections correlated |
+
+### Investigation Reports
+
+**[01 — Brute-Force Login Detection](investigations/INV01-BruteForce-Investigation.md)**
+
+Simulated failed Windows authentication attempts, investigated Security Event ID 4625, and validated a custom high-severity correlation alert mapped to MITRE ATT&CK T1110.
+
+**[02 — Suspicious PowerShell Execution](investigations/INV02-PowerShell-Investigation.md)**
+
+Analyzed Sysmon process creation telemetry, developed a custom rule detecting `-ExecutionPolicy Bypass`, and validated MITRE ATT&CK T1059.001 mapping.
+
+**[03 — Phishing Email Analysis](investigations/INV03-Phishing-Investigation.md)**
+
+Examined a simulated invoice-themed phishing email, extracted suspicious indicators, calculated SHA-256 hashes, and investigated file modifications using Wazuh FIM.
+
+**[04 — Security Configuration Tampering](investigations/INV04-ConfigTampering-Investigation.md)**
+
+Simulated changes to security configuration values, detected integrity violations, restored the original file, and verified recovery through Wazuh.
+
+**[05 — Network Reconnaissance Detection](investigations/INV05-Network-Investigation.md)**
+
+Performed authorized Nmap reconnaissance from Kali Linux, analyzed Windows Firewall logs, and investigated a high-severity Wazuh alert correlating multiple dropped connections.
+
+**[Browse All Investigations](investigations/README.md)**
+
+## Detection Engineering
+
+The lab includes custom detection rules designed and validated against controlled simulation events.
+
+| Rule ID | Detection | Severity | MITRE ATT&CK |
+|---|---|---|---|
+| 100200 | Repeated Windows authentication failures | 12 | T1110 |
+| 100300 | PowerShell execution-policy bypass | 10 | T1059.001 |
+
+These rules demonstrate practical experience with Wazuh XML rule configuration, correlation conditions, command-line matching, configuration validation, and alert verification.
+
+The existing Wazuh rule set was also used to investigate Sysmon process activity, file integrity changes, and repeated firewall drops.
+
+## Incident Response Workflow
+
+Each investigation follows a structured approach:
+
+1. **Simulation:** Generate controlled, authorized security activity.
+2. **Detection:** Identify the relevant Wazuh alert or log event.
+3. **Investigation:** Examine source details, timestamps, event metadata, and affected assets.
+4. **Analysis:** Determine whether the available evidence supports malicious behavior.
+5. **Response:** Document appropriate containment or remediation actions and perform recovery where applicable.
+6. **Documentation:** Preserve screenshots, technical findings, and investigation conclusions.
+
+All scenarios were conducted in an authorized home lab. Simulated malicious behavior was distinguished from actual system compromise.
 
 ## Skills Demonstrated
 
 - SIEM deployment and administration
-- Security Operations Center (SOC) fundamentals
+- Security event monitoring and log correlation
+- SOC alert triage and investigation
 - Windows Event Log analysis
-- Endpoint monitoring
-- Threat detection and alert investigation
-- Linux server administration
-- VMware virtualization
-- Network connectivity troubleshooting
-- Technical documentation
+- Sysmon endpoint telemetry analysis
+- Wazuh custom detection rule development
+- File Integrity Monitoring
+- Phishing email indicator analysis
+- Network reconnaissance detection
+- Windows Firewall log analysis
+- MITRE ATT&CK mapping
+- Incident response and remediation verification
+- Technical documentation and evidence collection
 
-## Key Takeaways
+## Security and Scope
 
-This project provided practical experience deploying and operating a SIEM platform rather than relying solely on theoretical cybersecurity concepts.
+This project was performed using personally controlled devices and authorized laboratory simulations.
 
-I gained experience with centralized security monitoring, endpoint log collection, authentication failure detection, and investigating alerts using Windows Event IDs and Wazuh detection rules.
+The simulations did not involve unauthorized third-party systems. Temporary firewall rules and logging changes used during network testing were restored after the investigation.
 
-The completed environment provides a foundation for future exercises involving additional endpoints, custom detection rules, and more advanced incident response scenarios.
+Network addresses in publicly shared investigation materials may be redacted to minimize exposure of the home lab's configuration.
 
-## Project Status
+## Project Outcome
 
-**Completed — Initial SOC Deployment and Failed-Login Detection**
+Successfully built and tested a functional Wazuh-based SOC home lab and completed five evidence-backed security investigations.
 
-The Wazuh SIEM environment is operational, the Windows endpoint is actively monitored, and a controlled authentication failure was successfully detected and investigated.
+The project demonstrates hands-on experience across the SOC lifecycle, from telemetry collection and detection development to alert analysis, incident documentation, and remediation verification.
 
-This project was developed as part of my hands-on cybersecurity portfolio.
+**Project Status: Completed — November 2026**
